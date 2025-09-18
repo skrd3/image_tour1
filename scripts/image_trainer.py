@@ -57,7 +57,7 @@ def secret_sauce(model, model_type, config):
         else:
             config["max_train_steps"] = 1000
 
-    config["save_every_n_epochs"] = 2
+    config["save_every_n_epochs"] = 3
 
     return config
 
