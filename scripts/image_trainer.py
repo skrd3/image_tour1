@@ -174,7 +174,7 @@ def run_training(model_type, config_path):
             "--mixed_precision", "bf16",
             "--num_processes", "1",
             "--num_machines", "1",
-            "--num_cpu_threads_per_process", "2",
+            "--num_cpu_threads_per_process", "4",
             f"/app/sd-script/{model_type}_train_network.py",
             "--config_file", config_path
         ]
@@ -186,7 +186,7 @@ def run_training(model_type, config_path):
             "--mixed_precision", "bf16",
             "--num_processes", "1",
             "--num_machines", "1",
-            "--num_cpu_threads_per_process", "2",
+            "--num_cpu_threads_per_process", "4",
             f"/app/sd-scripts/{model_type}_train_network.py",
             "--config_file", config_path
         ]
