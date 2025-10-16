@@ -39,6 +39,22 @@ def create_config(task_id, model_path, model_name, model_type, expected_repo_nam
     """Create the diffusion config file"""
     config_template_path, is_style = train_paths.get_image_training_config_template_path(model_type, train_data_dir)
 
+    # Check if config template file exists
+    if not os.path.exists(config_template_path):
+        print(f"ERROR: Config template file not found: {config_template_path}", flush=True)
+        print(f"Current working directory: {os.getcwd()}", flush=True)
+        print(f"Contents of /workspace/core/config/:", flush=True)
+        try:
+            config_dir = "/workspace/core/config"
+            if os.path.exists(config_dir):
+                for file in os.listdir(config_dir):
+                    print(f"  - {file}", flush=True)
+            else:
+                print(f"  Directory {config_dir} does not exist", flush=True)
+        except Exception as e:
+            print(f"  Error listing directory: {e}", flush=True)
+        raise FileNotFoundError(f"Config template file not found: {config_template_path}")
+
     with open(config_template_path, "r") as file:
         config = toml.load(file)
 

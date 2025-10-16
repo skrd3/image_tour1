@@ -18,10 +18,15 @@ RUN mkdir -p /dataset/configs \
     /workspace/scripts \
     /workspace/core
 
+# Copy core directory and ensure config files are properly copied
 COPY core /workspace/core
 COPY miner /workspace/miner
 COPY trainer /workspace/trainer
 COPY scripts /workspace/scripts
+
+# Verify that config files are copied correctly
+RUN ls -la /workspace/core/config/ || echo "Config directory not found"
+RUN ls -la /workspace/core/config/*.toml || echo "TOML config files not found"
 
 RUN chmod +x /workspace/scripts/run_image_trainer.sh
 RUN chmod +x /workspace/scripts/image_trainer.py
